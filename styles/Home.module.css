@@ -10,8 +10,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background-color: pink;
 }
 
 .footer {
@@ -30,9 +28,9 @@
   flex-grow: 1;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.title {
+  background-color: skyblue;
+  padding: 20px;
 }
 
 .title a:hover,
