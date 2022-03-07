@@ -13,13 +13,11 @@ export default function Home({ pokemons }) {
         {pokemons.map((pokemon, index) => (
           <li key={index}>
             <Link href={`/pokemon?id=${index + 1}`}>
-              <a className='border-sky-600 my-2 flex items-center rounded-md border-2 bg-gray-200 p-4 text-lg capitalize hover:bg-amber-100'>
-                <img
-                  className='mr-3 h-20 w-20'
-                  src={pokemon.image}
-                  alt={pokemon.name}
-                />
-                <span>{index + 1}. </span>
+              <a className='card-bg my-2 flex select-none items-center rounded-md border-2 border-sky-600 p-4 text-lg capitalize'>
+                <div className='relative mr-3 h-20 w-20'>
+                  <Image src={pokemon.image} alt={pokemon.name} layout='fill' />
+                </div>
+                <span className='mr-2 font-bold'>{index + 1}. </span>
                 {pokemon.name}
               </a>
             </Link>

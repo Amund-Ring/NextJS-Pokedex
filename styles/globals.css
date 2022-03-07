@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card-bg {
+  background: linear-gradient(0deg, #f2e891, #f3ea99, #f4eca1, #f5efa9, #f6f1b1, #f7f3b8, #f9f5c0, #faf7c8);
+}
+
+.card-bg:hover {
+  background: linear-gradient(0deg, #ecd4ff, #efd3fe, #f1d3fd, #f4d2fc, #f7d1fb, #fad0fa, #fcd0f8, #ffcff7);
+}
