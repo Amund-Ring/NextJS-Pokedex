@@ -5,22 +5,42 @@ import Layout from '../components/Layout';
 export default function pokemon({ pokemon }) {
   return (
     <Layout title={pokemon.name}>
-      <h1 className='mb-2 text-center text-4xl capitalize text-white drop-shadow-md'>
-        {pokemon.name}
-      </h1>
-      <div className='relative mx-auto w-96 h-96'>
-        <Image src={pokemon.image} alt={pokemon.name} layout='fill' />
+      <div className='rounded-[22px] border-[26px] border-amber-300 bg-amber-300 shadow-xl max-w-xl mx-auto'>
+        <div className='h-full w-full rounded-[22px] bg-orange-500 p-4'>
+          <h1 className='mb-2 text-center text-4xl capitalize text-white drop-shadow-md'>
+            {pokemon.name}
+          </h1>
+          <div className='relative mx-auto aspect-square w-full border-2 border-green-400'>
+            <Image src={pokemon.image} alt={pokemon.name} layout='fill' />
+          </div>
+
+          <div className='border-2 flex justify-around'>
+            <p>
+              <span className='mr-2 font-bold'>Weight:</span>
+              {pokemon.weight/10} kg
+            </p>
+
+            <p>
+              <span className='mr-2 font-bold'>Height:</span>
+              {pokemon.height*10} cm
+            </p>
+          </div>
+
+          <h2 className='mt-6 mb-2 text-2xl'>Types</h2>
+          {pokemon.types.map(({ type }, index) => (
+            <p key={index}>{type.name}</p>
+          ))}
+          <h2 className='mt-6 mb-2 text-2xl'>Abilities</h2>
+          {pokemon.abilities.map(({ ability }, index) => (
+            <p key={index}>{ability.name}</p>
+          ))}
+        </div>
       </div>
-      <p><span className="font-bold mr-2">Weight</span>{pokemon.weight}</p>
-      <p><span className="font-bold mr-2">Height</span>{pokemon.height}</p>
-      <h2 className="text-2xl mt-6 mb-2">Types</h2>
-      {pokemon.types.map((type, index) => (
-        <p key={index}>{type.type.name}</p>
-      ))}
-      <p className="mt-10 text-center">
+      <p className='mt-10 text-center'>
         <Link href='/'>
           <a className='text-2xl underline'>Home</a>
-        </Link></p>
+        </Link>
+      </p>
     </Layout>
   );
 }

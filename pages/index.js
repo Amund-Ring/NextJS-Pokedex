@@ -9,21 +9,30 @@ export default function Home({ pokemons }) {
       <h1 className='mb-8 text-center text-4xl text-white drop-shadow-md'>
         NextJS Pokedex
       </h1>
-      <ul>
-        {pokemons.map((pokemon, index) => (
-          <li key={index}>
-            <Link href={`/pokemon?id=${index + 1}`}>
-              <a className='card-bg my-2 flex select-none items-center rounded-md border-2 border-sky-600 p-4 text-lg capitalize'>
-                <div className='relative mr-3 h-20 w-20'>
-                  <Image src={pokemon.image} alt={pokemon.name} layout='fill' />
-                </div>
-                <span className='mr-2 font-bold'>{index + 1}. </span>
-                {pokemon.name}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul className='mx-auto flex flex-wrap justify-center gap-4'>
+          {pokemons.map((pokemon, index) => (
+            <li className='w-full max-w-xs' key={index}>
+              <Link href={`/pokemon?id=${index + 1}`}>
+                <a className='card-bg my-2 flex  select-none items-center rounded-md border-2 border-sky-600 p-4 pl-8 text-lg capitalize'>
+                  <div className='relative mr-3 h-20 w-20'>
+                    <Image
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      layout='fill'
+                    />
+                  </div>
+                  <span className='mr-2 font-bold'>{index + 1}. </span>
+                  {pokemon.name}
+                </a>
+              </Link>
+            </li>
+          ))}
+          {/* The following list elements are added so that the last row of the flexbox is left-aligned */}
+          <li className='w-full max-w-xs'></li>
+          <li className='w-full max-w-xs'></li>
+        </ul>
+      </div>
     </Layout>
   );
 }

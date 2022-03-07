@@ -6,12 +6,12 @@ export default function Layout({ title, children }) {
   }
 
   return (
-    <div className='bg-sky-400 pb-6'>
+    <div className='bg-sky-400'>
       <Head>
         <title>{capitalize(title)}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='container mx-auto min-h-screen max-w-xl pt-8'>
+      <main className='container mx-auto min-h-screen min-w-full pt-8 border-4 p-4'>
         {children}
       </main>
     </div>
