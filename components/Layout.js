@@ -11,7 +11,10 @@ export default function Layout({ title, children }) {
         <title>{capitalize(title)}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='container mx-auto min-h-screen min-w-full pt-8 border-4 p-4'>
+      <main className='container mx-auto min-h-screen min-w-full p-4 pt-8'>
+        <h1 className='mb-10 mt-6 text-center text-4xl text-white drop-shadow-md'>
+          NextJS Pokedex
+        </h1>
         {children}
       </main>
     </div>
