@@ -53,7 +53,7 @@ export default function Pokemon({ pokemon }) {
                 <Image src={pokemon.image} alt={pokemon.name} layout='fill' />
               </div>
 
-              <div className='flex justify-center gap-14 pt-3'>
+              <div className='flex justify-center gap-14 pt-3 text-xs sm:text-base'>
                 <p>
                   <span className='mr-2 font-bold'>Weight:</span>
                   {pokemon.weight / 10} kg
