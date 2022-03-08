@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 
-export default function pokemon({ pokemon }) {
+export default function Pokemon({ pokemon }) {
   const [isVisible, setIsVisible] = useState(true);
   const router = useRouter();
 
