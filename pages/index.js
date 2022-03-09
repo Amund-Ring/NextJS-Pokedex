@@ -35,19 +35,14 @@ export default function Home({ pokemons }) {
     }, 300);
   };
 
-  const filterPokemon = text => {
-    const filtered = pokemons.filter(pokemon => pokemon.name.includes(text));
-    return filtered;
-  };
 
   useEffect(() => {
-    const filteredPokemon = filterPokemon(filterInput);
-
+    const filteredPokemon = pokemons.filter(pokemon => pokemon.name.includes(filterInput));
     setLinkList(filteredPokemon)
 
     // const timeOutId = setTimeout(() => setLinkList(filteredPokemon), 400);
     // return () => clearTimeout(timeOutId);
-  }, [filterInput, filterPokemon]);
+  }, [filterInput]);
 
   return (
     <Layout title='NextJS Pokedex'>
@@ -55,7 +50,7 @@ export default function Home({ pokemons }) {
         NextJS Pokedex
       </h1>
 
-      <FilterInput setLinkList={setLinkList} setFilterInput={setFilterInput}/>
+      <FilterInput setFilterInput={setFilterInput}/>
 
 
       <div>

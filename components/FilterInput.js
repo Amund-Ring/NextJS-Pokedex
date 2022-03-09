@@ -1,4 +1,4 @@
-export default function FilterInput({ setLinkList, setFilterInput }) {
+export default function FilterInput({ setFilterInput }) {
   return (
     <form className='group absolute right-8 top-8 w-48'>
       <svg
