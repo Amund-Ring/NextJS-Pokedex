@@ -4,7 +4,7 @@ import { useTransition, animated } from 'react-spring';
 import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
-import FilterInput from '../components/filterInput';
+import FilterInput from '../components/FilterInput';
 
 export default function Home({ pokemons }) {
   const [linkList, setLinkList] = useState(pokemons);
