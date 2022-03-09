@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Layout({ title, children }) {
   function capitalize(str) {
@@ -11,10 +12,12 @@ export default function Layout({ title, children }) {
         <title>{capitalize(title)}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='container mx-auto min-h-screen min-w-full p-4 pt-8 overflow-hidden'>
-        <h1 className='mb-10 mt-6 text-center text-4xl text-white drop-shadow-md'>
-          NextJS Pokedex
-        </h1>
+      <main className='container mx-auto min-h-screen min-w-full overflow-hidden p-4 pt-8'>
+        <Link href='/'>
+          <h1 className='mb-10 mt-6 text-center text-4xl text-white drop-shadow-md select-none cursor-pointer'>
+            NextJS Pokedex
+          </h1>
+        </Link>
         {children}
       </main>
     </div>
