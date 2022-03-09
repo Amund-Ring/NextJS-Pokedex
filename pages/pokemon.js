@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { AiOutlineHome } from 'react-icons/ai';
 import { useTransition, animated } from 'react-spring';
 import { useRouter } from 'next/router';
@@ -8,17 +7,17 @@ import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 
 export default function Pokemon({ pokemon }) {
-  const [isVisible, setIsVisible] = useState(true);
+  const [cardVisible, setCardVisible] = useState(true);
   const router = useRouter();
 
-  const transition = useTransition(isVisible, {
-    from: { x: -1500, opacity: 0 },
+  const transition = useTransition(cardVisible, {
+    from: { x: 1500, opacity: 0 },
     enter: { x: 0, opacity: 1 },
-    leave: { x: 1500, opacity: 0 }
+    leave: { x: -1500, opacity: 0 }
   });
 
   const slideAndNavigate = () => {
-    setIsVisible(v => !v);
+    setCardVisible(v => !v);
     setTimeout(() => {
       router.push('/');
     }, 300);
@@ -27,7 +26,6 @@ export default function Pokemon({ pokemon }) {
   return (
     <Layout title={pokemon.name}>
       <div className='invisible absolute top-14 ml-8 w-32 text-center md:visible'>
-        {/* <Link href='/'> */}
         <a
           onClick={slideAndNavigate}
           className='flex cursor-pointer items-center justify-center gap-2 text-2xl text-white'
@@ -35,7 +33,6 @@ export default function Pokemon({ pokemon }) {
           <AiOutlineHome />
           Home
         </a>
-        {/* </Link> */}
       </div>
 
       {transition((style, item) =>
