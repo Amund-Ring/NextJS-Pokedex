@@ -13,11 +13,6 @@ export default function Layout({ title, children }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='container mx-auto min-h-screen min-w-full overflow-hidden p-4 pt-8'>
-        <Link href='/'>
-          <h1 className='mb-10 mt-6 text-center text-4xl text-white drop-shadow-md select-none cursor-pointer'>
-            NextJS Pokedex
-          </h1>
-        </Link>
         {children}
       </main>
     </div>

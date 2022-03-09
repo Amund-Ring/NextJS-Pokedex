@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { AiOutlineHome } from 'react-icons/ai';
 import { useTransition, animated } from 'react-spring';
 import { useRouter } from 'next/router';
-
 import Layout from '../components/Layout';
 
 export default function Pokemon({ pokemon }) {
@@ -20,11 +19,16 @@ export default function Pokemon({ pokemon }) {
     setCardVisible(v => !v);
     setTimeout(() => {
       router.push('/');
-    }, 300);
+    }, 150);
   };
 
   return (
     <Layout title={pokemon.name}>
+      <h1 
+      onClick={slideAndNavigate}
+      className='mb-10 mt-6 cursor-pointer select-none text-center text-4xl text-white drop-shadow-md'>
+        NextJS Pokedex
+      </h1>
       <div className='invisible absolute top-14 ml-8 w-32 text-center md:visible'>
         <a
           onClick={slideAndNavigate}
