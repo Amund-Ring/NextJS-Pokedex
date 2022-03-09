@@ -47,7 +47,7 @@ export default function Home({ pokemons }) {
 
     // const timeOutId = setTimeout(() => setLinkList(filteredPokemon), 400);
     // return () => clearTimeout(timeOutId);
-  }, [filterInput]);
+  }, [filterInput, filterPokemon]);
 
   return (
     <Layout title='NextJS Pokedex'>
