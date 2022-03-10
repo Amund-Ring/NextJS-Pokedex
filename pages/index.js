@@ -61,7 +61,7 @@ export default function Home({ pokemons }) {
       <FilterInput setFilterText={setFilterText} />
 
       <div>
-        <ul className='mx-auto flex flex-wrap justify-center gap-4'>
+        <ul className='flex flex-wrap justify-center gap-4 border-2'>
           {transition((style, pokemon) => {
             return (
               <>
