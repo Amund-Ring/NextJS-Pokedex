@@ -16,7 +16,7 @@ export default function Home({ pokemons }) {
   const transition = useTransition(linkList, {
     from: { x: 1500, y: 1500, opacity: 0 },
     enter: pokemon => next =>
-      next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 15 }),
+      next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 20 }),
     leave: pokemon => next =>
       next(
         cardSlideActivated
@@ -36,16 +36,19 @@ export default function Home({ pokemons }) {
     const filteredPokemon = pokemons.filter(pokemon =>
       pokemon.name.includes(filterText)
     );
+
     setLinkList(filteredPokemon);
     setFiltering(false);
-    const timeOutId = setTimeout(() => setCardSlideActivated(true), 1200);
-    return () => clearTimeout(timeOutId);
+
+    setTimeout(() => {
+      setCardSlideActivated(true);
+    }, 1400);
   };
 
   useEffect(() => {
     setCardSlideActivated(false);
     setFiltering(true);
-    const timeOutId = setTimeout(filterPokemon, 200);
+    const timeOutId = setTimeout(filterPokemon, 300);
     return () => clearTimeout(timeOutId);
   }, [filterText]);
 
@@ -96,6 +99,7 @@ export default function Home({ pokemons }) {
           <li className='w-full max-w-xs'></li>
           <li className='w-full max-w-xs'></li>
           <li className='w-full max-w-xs'></li>
+          <li className='w-full max-w-xs'></li>
         </ul>
       </div>
     </Layout>
@@ -104,7 +108,7 @@ export default function Home({ pokemons }) {
 
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200');
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=500');
     const { results } = await res.json();
     const pokemons = results.map((result, index) => {
       const paddedIndex = '00'.concat(index + 1).slice(-3);
