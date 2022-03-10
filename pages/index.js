@@ -16,7 +16,7 @@ export default function Home({ pokemons }) {
   const transition = useTransition(linkList, {
     from: { x: 1500, y: 1500, opacity: 0 },
     enter: pokemon => next =>
-      next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 20 }),
+      next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 15 }),
     leave: pokemon => next =>
       next(
         cardSlideActivated
