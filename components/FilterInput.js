@@ -1,4 +1,4 @@
-export default function FilterInput({ setFilterInput }) {
+export default function FilterInput({ setFilterText }) {
   return (
     <form className='group absolute right-8 top-8 w-48'>
       <svg
@@ -20,8 +20,7 @@ export default function FilterInput({ setFilterInput }) {
         aria-label='Filter pokemon'
         placeholder='Filter pokemon...'
         onChange={e => {
-          // setLinkList([]);
-          setFilterInput(e.target.value);
+          setFilterText(e.target.value);
         }}
       />
     </form>

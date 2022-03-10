@@ -1,32 +1,29 @@
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import { useTransition, animated } from 'react-spring';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import { useTransition, animated } from 'react-spring';
+import Image from 'next/image';
 
-import Layout from '../components/Layout';
 import FilterInput from '../components/FilterInput';
+import Layout from '../components/Layout';
 
 export default function Home({ pokemons }) {
+  const [cardSlideActivated, setCardSlideActivated] = useState(true);
+  const [filtering, setFiltering] = useState(false);
+  const [filterText, setFilterText] = useState('');
   const [linkList, setLinkList] = useState(pokemons);
   const router = useRouter();
-  const [filterInput, setFilterInput] = useState('');
 
   const transition = useTransition(linkList, {
     from: { x: 1500, y: 1500, opacity: 0 },
     enter: pokemon => next =>
       next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 15 }),
     leave: pokemon => next =>
-      next({ x: -1500, opacity: 0, delay: pokemon.index * 5 })
+      next(
+        cardSlideActivated
+          ? { x: -1500, opacity: 0, delay: pokemon.index * 5 }
+          : { x: 0, opacity: 1, delay: 0 }
+      )
   });
-
-  // const transition = useTransition(linkList, {
-  //   from: { x: 1500, y: 0, opacity: 1 },
-  //   enter: pokemon => next =>
-  //     next({ x: 0, y: 0, opacity: 1, delay: pokemon.index * 0 }),
-  //   leave: pokemon => next =>
-  //     next({ x: -1500, opacity: 1, delay: pokemon.index * 0 })
-  // });
-
 
   const slideAndNavigate = index => {
     setLinkList([]);
@@ -35,14 +32,22 @@ export default function Home({ pokemons }) {
     }, 300);
   };
 
+  const filterPokemon = () => {
+    const filteredPokemon = pokemons.filter(pokemon =>
+      pokemon.name.includes(filterText)
+    );
+    setLinkList(filteredPokemon);
+    setFiltering(false);
+    const timeOutId = setTimeout(() => setCardSlideActivated(true), 1200);
+    return () => clearTimeout(timeOutId);
+  };
 
   useEffect(() => {
-    const filteredPokemon = pokemons.filter(pokemon => pokemon.name.includes(filterInput));
-    setLinkList(filteredPokemon)
-
-    // const timeOutId = setTimeout(() => setLinkList(filteredPokemon), 400);
-    // return () => clearTimeout(timeOutId);
-  }, [filterInput, pokemons]);
+    setCardSlideActivated(false);
+    setFiltering(true);
+    const timeOutId = setTimeout(filterPokemon, 200);
+    return () => clearTimeout(timeOutId);
+  }, [filterText]);
 
   return (
     <Layout title='NextJS Pokedex'>
@@ -50,42 +55,45 @@ export default function Home({ pokemons }) {
         NextJS Pokedex
       </h1>
 
-      <FilterInput setFilterInput={setFilterInput}/>
-
+      <FilterInput setFilterText={setFilterText} />
 
       <div>
         <ul className='mx-auto flex flex-wrap justify-center gap-4'>
           {transition((style, pokemon) => {
-            return pokemon ? (
-              <animated.div style={style} className='pokemon w-full max-w-xs'>
-                <li
-                  className='duration-300 hover:scale-105 hover:transform'
-                  key={pokemon.index}
-                >
-                  <a
-                    onClick={() => slideAndNavigate(pokemon.index)}
-                    className='card-bg my-2 flex  select-none items-center rounded-md border-2 border-sky-600 p-4 pl-8 text-lg capitalize'
-                  >
-                    <div className='relative mr-3 h-20 w-20'>
-                      <Image
-                        src={pokemon.image}
-                        alt={pokemon.name}
-                        layout='fill'
-                      />
-                    </div>
-                    <span className='mr-2 font-bold'>
-                      {pokemon.index + 1}.{' '}
-                    </span>
-                    {pokemon.name}
-                  </a>
-                </li>
-              </animated.div>
-            ) : (
-              ''
+            return (
+              <>
+                <animated.div style={style} className='pokemon w-full max-w-xs'>
+                  {!filtering && (
+                    <li
+                      className='duration-300 hover:scale-105 hover:transform'
+                      key={pokemon.index}
+                    >
+                      <a
+                        onClick={() => slideAndNavigate(pokemon.index)}
+                        className='card-bg my-2 flex  select-none items-center rounded-md border-2 border-sky-600 p-4 pl-8 text-lg capitalize'
+                      >
+                        <div className='relative mr-3 h-20 w-20'>
+                          <Image
+                            src={pokemon.image}
+                            alt={pokemon.name}
+                            layout='fill'
+                          />
+                        </div>
+                        <span className='mr-2 font-bold'>
+                          {pokemon.index + 1}.{' '}
+                        </span>
+                        {pokemon.name}
+                      </a>
+                    </li>
+                  )}
+                  {filtering && ''}
+                </animated.div>
+              </>
             );
           })}
 
           {/* The following list elements are added so that the last row of the flexbox is left-aligned */}
+          <li className='w-full max-w-xs'></li>
           <li className='w-full max-w-xs'></li>
           <li className='w-full max-w-xs'></li>
         </ul>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function Layout({ title, children }) {
   function capitalize(str) {
