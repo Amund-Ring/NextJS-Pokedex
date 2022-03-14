@@ -108,7 +108,7 @@ export default function Home({ pokemons }) {
 
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=500');
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200');
     const { results } = await res.json();
     const pokemons = results.map((result, index) => {
       const paddedIndex = '00'.concat(index + 1).slice(-3);
